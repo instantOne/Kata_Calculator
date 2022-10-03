@@ -1,4 +1,4 @@
-package com.JavaLessons.Lab9;
+package com;
 import java.util.Scanner;
 import java.util.List;
 

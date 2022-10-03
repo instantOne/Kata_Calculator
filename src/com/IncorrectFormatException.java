@@ -1,4 +1,4 @@
-package com.JavaLessons.Lab9;
+package com;
 
 public class IncorrectFormatException extends Exception{
 }
