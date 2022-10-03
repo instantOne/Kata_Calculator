@@ -13,14 +13,12 @@ public class Main {
             String[] input = scan.nextLine().split(" ");
 
             if (input.length != 3) {
-                System.out.println("Формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
-                throw new IncorrectFormatException();
+                throw new IncorrectFormatException("Формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
             }
 
             if (!((input[1].equals("+")) || (input[1].equals("-")) ||
                     (input[1].equals("/")) || (input[1].equals("*")))) {
-                System.out.println("Неверный оператор");
-                throw new UnknownOperatorException();
+                throw new UnknownOperatorException("Неверный оператор");
             }
             try {
                 int a = Integer.parseInt(input[0]);
@@ -29,28 +27,24 @@ public class Main {
                     if ((a >= 0) && (a <= 10) && (b >= 0) && (b <= 10)) {
                         System.out.println(Result(a, b, input[1]));
                     } else {
-                        System.out.println("Вводить можно только числа в диапазоне от 1 до 10");
-                        throw new NumberRangeException();
+                        throw new NumberRangeException("Вводить можно только числа в диапазоне от 1 до 10");
                     }
                 } catch (NumberFormatException e) {
                     int b = romanToArabic(input[2]);
-                    System.out.println("Числа должны быть в одной системе счисления");
-                    throw new DifferentTypesException();
+                    throw new DifferentTypesException("Числа должны быть в одной системе счисления");
                 }
             } catch (NumberFormatException e) {
                 int a = romanToArabic(input[0]);
                 try {
                     int b = Integer.parseInt(input[2]);
 
-                    System.out.println("Числа должны быть в одной системе счисления");
-                    throw new DifferentTypesException();
+                    throw new DifferentTypesException("Числа должны быть в одной системе счисления");
                 } catch (NumberFormatException l) {
                     int b = romanToArabic(input[2]);
                     if ((a >= 0) && (a <= 10) && (b >= 0) && (b <= 10)) {
                         System.out.println(arabicToRoman(Result(a, b, input[1])));
                     } else {
-                        System.out.println("Вводить можно только числа в диапазоне от 1 до 10");
-                        throw new NumberRangeException();
+                        throw new NumberRangeException("Вводить можно только числа в диапазоне от 1 до 10");
                     }
                 }
             }
@@ -100,8 +94,7 @@ public class Main {
 
     public static String arabicToRoman(int number) throws RomanNegativeException {
         if (number < 0) {
-            System.out.println("В римской системе нет отрицательных чисел");
-            throw new RomanNegativeException();
+            throw new RomanNegativeException("В римской системе нет отрицательных чисел");
         }
         else if (number == 0){
             return "0";
@@ -125,7 +118,7 @@ public class Main {
         return sb.toString();
     }
 
-    public static int Result(int a, int b, String operator) throws UnknownOperatorException {
+    public static int Result(int a, int b, String operator) {
         switch (operator) {
             case ("+"):
                 return a + b;
